@@ -5,3 +5,33 @@ body.reduce-motion *,body.reduce-motion *:before,body.reduce-motion *:after{anim
 @media(max-width:1200px){.overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.unit-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.commander-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-art{width:42%}.hero:after{background:linear-gradient(90deg,#171a2b 0%,#171a2b 48%,transparent 90%)}}
 @media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{position:fixed;z-index:30;top:auto;bottom:0;left:0;right:0;height:auto;min-height:0;padding:6px 8px calc(6px + env(safe-area-inset-bottom));border-right:0;border-top:1px solid var(--line);background:#121522f5;backdrop-filter:blur(18px)}.player-card,.sidebar-bottom{display:none}.nav{display:flex;justify-content:space-around;gap:3px;margin:0}.nav-item{flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:7px 2px;font-size:8px;text-align:center;min-width:0}.nav-item>span{font-size:17px;width:auto}.nav-item b,.nav-dot{display:none}.main-content{padding:23px 18px 100px}.topbar{height:65px;padding:0 18px}.hero{min-height:300px}.hero-art{opacity:.55;width:52%}.hero-copy{max-width:480px}.hero h1{font-size:39px}.home-columns{grid-template-columns:1fr}.battle-sides{padding:15px 12px;grid-template-columns:1fr 28px 1fr;gap:5px}.battle-roster{grid-template-columns:repeat(2,minmax(0,1fr))}.battle-unit{padding:7px 4px}.battle-log{margin:0 12px}.arena-footer{padding:13px 12px}.battle-tip{max-width:48%;line-height:1.5}.formation-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gacha-stage,.pack-showcase{grid-template-columns:1fr;gap:5px}.gacha-orb{height:210px}.orb-ring{width:170px;height:170px}.orb-core{width:95px;height:95px}.pack-visual{min-height:230px}.pack-art{width:130px;height:175px}.page-heading{align-items:flex-start}.page-heading h1{font-size:31px}.battle-reward{display:none}}
 @media(max-width:560px){.top-stats{gap:7px}.currency{padding:6px 8px}.hero{padding:25px 20px;min-height:330px}.hero-art{right:-30%;width:85%;opacity:.27}.hero:after{background:linear-gradient(90deg,#171a2b 0%,#171a2bf0 60%,#171a2b66 100%)}.hero h1{font-size:35px}.hero p{font-size:11px}.hero-actions{gap:8px}.primary-button,.secondary-button{padding:11px 12px;font-size:10px}.overview-grid{gap:8px}.stat-card{padding:12px 9px;gap:8px}.stat-icon{width:31px;height:31px;font-size:17px}.stat-card small{font-size:7px;white-space:normal}.stat-card strong{font-size:22px}.stat-card span{font-size:8px}.section-heading h2{font-size:18px}.section-heading>.muted{max-width:130px;text-align:right;line-height:1.5}.squad-preview{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.mini-unit{padding:8px 3px}.mini-unit .unit-glyph{width:31px;height:31px;font-size:18px}.mini-unit strong{font-size:8px}.panel{padding:14px}.page-heading{gap:10px}.page-heading h1{font-size:29px}.page-heading p{font-size:10px}.reset-card{padding:10px}.reset-card strong{font-size:15px}.collection-toolbar input{width:100%}.unit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.unit-card-art{height:90px}.unit-card-body{padding:9px}.unit-card-footer{padding:8px}.commander-grid{grid-template-columns:1fr}.commander-feature{padding:15px;gap:13px}.commander-portrait{width:75px;height:90px;font-size:42px}.commander-feature h2{font-size:20px}.commander-feature p{font-size:10px}.shop-grid{grid-template-columns:1fr}.shop-item{padding:11px}.shop-banner{padding:20px}.shop-banner h2{font-size:23px}.banner-symbol{font-size:70px;margin-right:0}.battle-sides{grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr)}.side-title{gap:5px}.side-title strong{font-size:8px}.side-title small{font-size:8px}.versus{font-size:9px;padding:8px 4px}.battle-roster{gap:4px}.battle-unit .unit-glyph{width:27px;height:27px}.battle-unit strong{font-size:7px}.battle-log{font-size:9px}.battle-tip{font-size:8px}.arena-footer .primary-button{white-space:nowrap}.gacha-stage{padding:17px}.gacha-copy h2{font-size:30px}.gacha-rates{grid-template-columns:repeat(2,minmax(0,1fr))}.gacha-actions button{flex:1}.pack-showcase{padding:16px}.pack-description h2{font-size:25px}.drop-rates{gap:8px}.filter-tab{padding:8px 9px;font-size:9px}.filter-tabs{gap:4px}.collection-total{padding:10px}.collection-total strong{font-size:22px}.nav-item{font-size:7px}.nav-item>span{font-size:16px}}
+
+/* Sound settings */
+.volume-row input[type=range]{width:110px;accent-color:#a18aff;cursor:pointer}
+.setting-row input[type=range]{margin:0}
+
+/* v0.3 */
+.synergy-box,.synergy-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.synergy-chip,.synergy-pill{background:rgba(161,138,255,.12);border:1px solid rgba(161,138,255,.35);border-radius:999px;padding:4px 10px;font-size:11px;color:#d4c8ff}
+.synergy-chip strong{color:#fff;margin-right:4px}
+.battle-controls-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.speed-group{display:flex;gap:4px}
+.speed-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#c8cbe0;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:12px}
+.speed-btn.active{background:rgba(161,138,255,.25);border-color:#a18aff;color:#fff}
+.campaign-map{display:grid;gap:12px}
+.campaign-node{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px}
+.campaign-node.locked{opacity:.45}
+.campaign-node.cleared{border-color:rgba(90,200,140,.35)}
+.campaign-node.boss{border-color:rgba(242,202,115,.4)}
+.campaign-node .node-num{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(161,138,255,.15);font-weight:700}
+.campaign-node h3{margin:0 0 4px;font-size:15px}
+.campaign-node p{margin:0;font-size:12px;color:#9aa3bd}
+.missions-list{display:grid;gap:12px}
+.mission-card{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px}
+.mission-bar{height:6px;background:rgba(255,255,255,.08);border-radius:99px;margin:6px 0;overflow:hidden}
+.mission-bar>div{height:100%;background:linear-gradient(90deg,#7c6cff,#c29aff)}
+.mission-card.claimed{opacity:.55}
+.mission-mini{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.home-missions-preview{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)}
+.xp-bar{height:4px;background:rgba(255,255,255,.08);border-radius:99px;margin:6px 0;overflow:hidden}
+.xp-fill{height:100%;background:#73c3ff;width:0}

@@ -37,8 +37,11 @@
           <button class="nav-item" data-view="shop"><span>◈</span> Tienda diaria</button>
           <button class="nav-item" data-view="packs"><span>▣</span> Sobres</button>
           <button class="nav-item" data-view="gacha"><span>✧</span> Gachapón</button>
+          <button class="nav-item" data-view="campaign"><span>🗺</span> Campaña</button>
+          <button class="nav-item" data-view="missions"><span>⚑</span> Misiones</button>
+          <button class="nav-item" data-view="stats"><span>▣</span> Estadísticas</button>
         </nav>
-        <div class="sidebar-bottom"><span class="online-dot"></span> Simulación local <small>v0.1.0</small></div>
+        <div class="sidebar-bottom"><span class="online-dot"></span> Simulación local <small>v0.3.0</small></div>
       </aside>
 
       <main class="main-content">
@@ -72,7 +75,7 @@
             <article class="panel">
               <div class="panel-heading"><div><div class="eyebrow">PREPARACIÓN</div><h3>Tu escuadrón activo</h3></div><button class="text-button" data-view="collection">Gestionar ↗</button></div>
               <div id="homeSquad" class="squad-preview"></div>
-              <div class="commander-strip" id="homeCommander"></div>
+              <div class="commander-strip" id="homeCommander"></div><div class="synergy-box" id="homeSynergy"></div><div class="home-missions-preview"><div class="eyebrow">MISIONES</div><div id="homeMissions"></div><button class="text-button" data-view="missions">Ver todas ↗</button></div>
             </article>
             <article class="panel daily-panel">
               <div class="panel-heading"><div><div class="eyebrow">OFERTA ROTATIVA</div><h3>Mercado del día</h3></div><span class="live-label">● ACTIVO</span></div>
@@ -93,10 +96,10 @@
               <div class="battle-side enemy"><div class="side-title"><span>☠</span><div><strong>LEGIÓN RIVAL</strong><small>Comandante desconocido</small></div></div><div class="battle-roster" id="enemyBattleRoster"></div></div>
             </div>
             <div class="battle-log" id="battleLog"><span class="log-dot"></span> Tu escuadrón espera en la arena. Pulsa iniciar cuando estés listo.</div>
-            <div class="arena-footer"><div class="battle-tip">⚡ <span>El orden de actuación depende de la velocidad.</span></div><button class="primary-button" id="startBattleBtn">⚔ &nbsp; Iniciar combate</button></div>
+            <div class="arena-footer"><div class="battle-tip">⚡ <span>El orden de actuación depende de la velocidad.</span></div><div class="battle-controls-row"><div class="speed-group"><button type="button" data-speed="1" class="speed-btn active">1x</button><button type="button" data-speed="2" class="speed-btn">2x</button><button type="button" data-speed="3" class="speed-btn">3x</button></div><button class="secondary-button" id="skipBattleBtn" hidden type="button">⏭ Saltar</button><button class="primary-button" id="startBattleBtn">⚔ &nbsp; Iniciar combate</button></div></div>
           </div>
           <div class="section-heading"><div><div class="eyebrow">ANTES DE LUCHAR</div><h2>Formación actual</h2></div><span class="muted">8 espacios · 1 comandante</span></div>
-          <div class="formation-grid" id="battleFormation"></div>
+          <div id="battleSynergy" class="synergy-row"></div><div class="formation-grid" id="battleFormation"></div>
         </section>
 
         <section class="view" id="view-collection">
@@ -136,8 +139,27 @@
   </div>
 
   <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+
+        <section class="view" id="view-campaign">
+          <div class="section-heading"><div><div class="eyebrow">TEMPORADA I</div><h2>Campaña del Umbral</h2></div><span class="muted" id="campaignProgress">0/10 etapas</span></div>
+          <p class="muted" style="margin-bottom:16px">Avanza etapa a etapa. Los nodos con ★ son jefes con mejores recompensas.</p>
+          <div id="campaignMap" class="campaign-map"></div>
+        </section>
+
+        <section class="view" id="view-missions">
+          <div class="section-heading"><div><div class="eyebrow">DIARIAS</div><h2>Misiones del día</h2></div><span class="muted">Se renuevan a las 00:00</span></div>
+          <div id="missionsList" class="missions-list"></div>
+        </section>
+
+        <section class="view" id="view-stats">
+          <div class="section-heading"><div><div class="eyebrow">ARCHIVO</div><h2>Estadísticas de la legión</h2></div></div>
+          <div id="statsGrid" class="overview-grid"></div>
+          <div class="section-heading" style="margin-top:24px"><div><div class="eyebrow">DESTACADOS</div><h3>Unidades más usadas</h3></div></div>
+          <div id="statsTopUnits" class="squad-preview"></div>
+        </section>
+
   <dialog id="resultDialog" class="result-dialog"><button class="dialog-close" id="closeResult" aria-label="Cerrar">×</button><div id="resultContent"></div></dialog>
-  <dialog id="settingsDialog" class="settings-dialog"><button class="dialog-close" id="closeSettings" aria-label="Cerrar">×</button><div class="eyebrow">PREFERENCIAS</div><h2>Ajustes</h2><p>Tu progreso se guarda en este dispositivo.</p><label class="setting-row"><span><strong>Animaciones de combate</strong><small>Mostrar mensajes durante la batalla</small></span><input id="animationsToggle" type="checkbox" checked></label><label class="setting-row"><span><strong>Reducir movimiento</strong><small>Desactivar efectos visuales decorativos</small></span><input id="reducedMotionToggle" type="checkbox"></label><button class="secondary-button full-width" id="exportSaveBtn">Exportar partida guardada</button><button class="danger-button full-width" id="resetGameBtn">Reiniciar partida local</button><small class="muted">Reiniciar elimina los datos guardados de este juego en este navegador.</small></dialog>
+  <dialog id="settingsDialog" class="settings-dialog"><button class="dialog-close" id="closeSettings" aria-label="Cerrar">×</button><div class="eyebrow">PREFERENCIAS</div><h2>Ajustes</h2><p>Tu progreso se guarda en este dispositivo.</p><label class="setting-row"><span><strong>Animaciones de combate</strong><small>Mostrar mensajes durante la batalla</small></span><input id="animationsToggle" type="checkbox" checked></label><label class="setting-row"><span><strong>Reducir movimiento</strong><small>Desactivar efectos visuales decorativos</small></span><input id="reducedMotionToggle" type="checkbox"></label><label class="setting-row"><span><strong>Sonidos</strong><small>Efectos de combate, tienda y menús</small></span><input id="soundToggle" type="checkbox" checked></label><label class="setting-row volume-row"><span><strong>Volumen</strong><small id="volumeLabel">55%</small></span><input id="volumeSlider" type="range" min="0" max="100" value="55"></label><label class="setting-row"><span><strong>Música ambiental</strong><small>Bucle suave generado</small></span><input id="musicToggle" type="checkbox"></label><label class="setting-row"><span><strong>Vibración (móvil)</strong><small>Feedback háptico en acciones clave</small></span><input id="hapticsToggle" type="checkbox" checked></label><button class="secondary-button full-width" id="exportSaveBtn">Exportar partida guardada</button><button class="secondary-button full-width" id="importSaveBtn">Importar partida (JSON)</button><input type="file" id="importSaveInput" accept="application/json,.json" hidden><button class="danger-button full-width" id="resetGameBtn">Reiniciar partida local</button><small class="muted">Reiniciar elimina los datos guardados de este juego en este navegador.</small></dialog>
   <script src="game.js"></script>
 </body>
 </html>
