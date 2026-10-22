@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10131f">
+  <meta name="description" content="Legiones del Umbral: recluta unidades, reúne comandantes y domina el campo de batalla.">
+  <title>Legiones del Umbral</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Legiones del Umbral, inicio" data-view="home">
+        <span class="brand-mark">✦</span><span><strong>LEGIONES</strong><small>DEL UMBRAL</small></span>
+      </a>
+      <div class="top-stats">
+        <div class="currency"><span>◈</span><strong id="credits">0</strong><small>CRÉDITOS</small></div>
+        <button class="icon-button" id="installBtn" hidden title="Instalar aplicación">⇩</button>
+        <button class="icon-button" id="settingsBtn" title="Ajustes" aria-label="Ajustes">⚙</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="player-card">
+          <div class="avatar">✧</div>
+          <div><strong>Comandante</strong><small id="playerLevel">Recluta · Nivel 1</small></div>
+        </div>
+        <nav class="nav">
+          <button class="nav-item active" data-view="home"><span>⌂</span> Cuartel general</button>
+          <button class="nav-item" data-view="battle"><span>⚔</span> Combate <i class="nav-dot"></i></button>
+          <button class="nav-item" data-view="collection"><span>▦</span> Colección <b id="collectionCount">0</b></button>
+          <button class="nav-item" data-view="commanders"><span>♛</span> Comandantes</button>
+          <button class="nav-item" data-view="shop"><span>◈</span> Tienda diaria</button>
+          <button class="nav-item" data-view="packs"><span>▣</span> Sobres</button>
+          <button class="nav-item" data-view="gacha"><span>✧</span> Gachapón</button>
+        </nav>
+        <div class="sidebar-bottom"><span class="online-dot"></span> Simulación local <small>v0.1.0</small></div>
+      </aside>
+
+      <main class="main-content">
+        <section class="view active" id="view-home">
+          <div class="hero">
+            <div class="hero-copy">
+              <div class="eyebrow"><span></span> TEMPORADA I · EL PRIMER DESPERTAR</div>
+              <h1>Forja tu leyenda.<br><em>Domina el umbral.</em></h1>
+              <p>Reúne una legión, encuentra sinergias entre facciones y dirige a tus unidades hacia la victoria.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view="battle">⚔ &nbsp; Entrar en combate</button>
+                <button class="secondary-button" data-view="collection">Ver colección <span>↗</span></button>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+              <div class="sigil">✦</div><div class="hero-rune">ᚷ</div>
+              <div class="hero-caption"><span>ARCHIVO 001</span><strong>EL DESPERTAR</strong></div>
+            </div>
+          </div>
+
+          <div class="section-heading"><div><div class="eyebrow">TU PROGRESO</div><h2>Estado de la legión</h2></div><span class="muted" id="dailyReset">La tienda se renueva a las 00:00</span></div>
+          <div class="overview-grid">
+            <article class="stat-card"><div class="stat-icon violet">▦</div><div><small>UNIDADES RECLUTADAS</small><strong id="ownedUnitsStat">0</strong><span>en tu colección</span></div></article>
+            <article class="stat-card"><div class="stat-icon gold">♛</div><div><small>COMANDANTES</small><strong id="ownedCommandersStat">0</strong><span>líderes disponibles</span></div></article>
+            <article class="stat-card"><div class="stat-icon green">⚔</div><div><small>VICTORIAS</small><strong id="winsStat">0</strong><span>combates ganados</span></div></article>
+            <article class="stat-card"><div class="stat-icon blue">▣</div><div><small>SOBRES GUARDADOS</small><strong id="packsStat">0</strong><span>listos para abrir</span></div></article>
+          </div>
+
+          <div class="home-columns">
+            <article class="panel">
+              <div class="panel-heading"><div><div class="eyebrow">PREPARACIÓN</div><h3>Tu escuadrón activo</h3></div><button class="text-button" data-view="collection">Gestionar ↗</button></div>
+              <div id="homeSquad" class="squad-preview"></div>
+              <div class="commander-strip" id="homeCommander"></div>
+            </article>
+            <article class="panel daily-panel">
+              <div class="panel-heading"><div><div class="eyebrow">OFERTA ROTATIVA</div><h3>Mercado del día</h3></div><span class="live-label">● ACTIVO</span></div>
+              <div id="homeShopPreview"></div>
+              <button class="secondary-button full-width" data-view="shop">Explorar tienda diaria <span>→</span></button>
+            </article>
+          </div>
+          <div class="notice"><span>ⓘ</span><p><strong>Consejo táctico</strong> — Las unidades veloces actúan antes. Mezcla defensores, atacantes y apoyo para que tu legión sobreviva a encuentros difíciles.</p></div>
+        </section>
+
+        <section class="view" id="view-battle">
+          <div class="page-heading"><div><div class="eyebrow">CAMPO DE BATALLA</div><h1>Combate automático</h1><p>Prepara a tus ocho unidades. Ellas lucharán por ti.</p></div><div class="battle-reward"><span>RECOMPENSA POR VICTORIA</span><strong>+120 ◈ + 1 sobre</strong></div></div>
+          <div class="battle-arena">
+            <div class="arena-top"><span class="arena-label">ARENA DEL UMBRAL</span><span class="battle-status" id="battleStatus">ESPERANDO ÓRDENES</span></div>
+            <div class="battle-sides">
+              <div class="battle-side ally"><div class="side-title"><span>✦</span><div><strong>TU LEGIÓN</strong><small id="allyCommanderName">Sin comandante</small></div></div><div class="battle-roster" id="allyBattleRoster"></div></div>
+              <div class="versus">VS</div>
+              <div class="battle-side enemy"><div class="side-title"><span>☠</span><div><strong>LEGIÓN RIVAL</strong><small>Comandante desconocido</small></div></div><div class="battle-roster" id="enemyBattleRoster"></div></div>
+            </div>
+            <div class="battle-log" id="battleLog"><span class="log-dot"></span> Tu escuadrón espera en la arena. Pulsa iniciar cuando estés listo.</div>
+            <div class="arena-footer"><div class="battle-tip">⚡ <span>El orden de actuación depende de la velocidad.</span></div><button class="primary-button" id="startBattleBtn">⚔ &nbsp; Iniciar combate</button></div>
+          </div>
+          <div class="section-heading"><div><div class="eyebrow">ANTES DE LUCHAR</div><h2>Formación actual</h2></div><span class="muted">8 espacios · 1 comandante</span></div>
+          <div class="formation-grid" id="battleFormation"></div>
+        </section>
+
+        <section class="view" id="view-collection">
+          <div class="page-heading"><div><div class="eyebrow">ARCHIVO DE UNIDADES</div><h1>Tu colección</h1><p>Gestiona tu legión y elige las ocho unidades que entrarán en combate.</p></div><div class="collection-total"><strong id="collectionHeaderCount">0</strong><span>unidades únicas</span></div></div>
+          <div class="collection-toolbar"><div class="filter-tabs" id="rarityFilters"><button class="filter-tab active" data-rarity="all">Todas</button><button class="filter-tab" data-rarity="Común">Comunes</button><button class="filter-tab" data-rarity="Raro">Raras</button><button class="filter-tab" data-rarity="Épico">Épicas</button><button class="filter-tab" data-rarity="Legendario">Legendarias</button></div><input id="unitSearch" type="search" placeholder="Buscar unidad…" aria-label="Buscar unidad"></div>
+          <div class="collection-info"><span id="collectionFilterCount">Mostrando unidades</span><span>Seleccionadas: <strong id="selectedCount">0/8</strong></span></div>
+          <div class="unit-grid" id="unitCollection"></div>
+        </section>
+
+        <section class="view" id="view-commanders">
+          <div class="page-heading"><div><div class="eyebrow">LIDERAZGO Y SINERGIAS</div><h1>Comandantes</h1><p>Cada líder aporta una pasiva de combate, incluso los comandantes comunes.</p></div></div>
+          <div class="commander-feature" id="activeCommanderFeature"></div>
+          <div class="section-heading"><div><div class="eyebrow">LÍDERES RECLUTADOS</div><h2>Archivo de comandantes</h2></div></div>
+          <div class="commander-grid" id="commanderCollection"></div>
+        </section>
+
+        <section class="view" id="view-shop">
+          <div class="page-heading"><div><div class="eyebrow">MERCADO DEL UMBRAL</div><h1>Tienda diaria</h1><p>La selección cambia cada día a las 00:00, según la hora local de tu dispositivo.</p></div><div class="reset-card"><small>PRÓXIMA ROTACIÓN</small><strong id="shopCountdown">--:--:--</strong></div></div>
+          <div class="shop-banner"><div><span class="eyebrow">SELECCIÓN DEL DÍA</span><h2>La fortuna favorece<br>al preparado.</h2><p>Recluta unidades y comandantes para completar tu formación.</p></div><div class="banner-symbol">◈</div></div>
+          <div class="section-heading"><div><div class="eyebrow">OFERTAS DIARIAS</div><h2>Disponibles ahora</h2></div><span class="muted">Inventario renovable</span></div>
+          <div class="shop-grid" id="dailyShop"></div>
+        </section>
+
+        <section class="view" id="view-packs">
+          <div class="page-heading"><div><div class="eyebrow">RECOMPENSAS Y RECLUTAMIENTO</div><h1>Sobres de unidades</h1><p>Gana un sobre por cada victoria o compra más con tus créditos.</p></div><div class="pack-count"><span>EN TU INVENTARIO</span><strong id="packInventoryCount">0 sobres</strong></div></div>
+          <div class="pack-showcase"><div class="pack-visual"><div class="pack-glow"></div><div class="pack-art"><span>✦</span><strong>UMBRAL</strong><small>RECLUTAMIENTO</small></div></div><div class="pack-description"><div class="eyebrow">SOBRE ESTÁNDAR</div><h2>Una nueva fuerza<br>para tu legión.</h2><p>Cada sobre contiene 3 unidades aleatorias. Hay más posibilidades de encontrar unidades comunes, pero también puedes descubrir rarezas superiores.</p><div class="drop-rates"><span><i class="dot common"></i> Común <b>65%</b></span><span><i class="dot rare"></i> Raro <b>25%</b></span><span><i class="dot epic"></i> Épico <b>8%</b></span><span><i class="dot legendary"></i> Legendario <b>2%</b></span></div><button class="primary-button" id="openPackBtn">Abrir un sobre <span id="openPackLabel"></span></button><button class="secondary-button" id="buyPackBtn">Comprar sobre · 250 ◈</button></div></div>
+          <div class="section-heading"><div><div class="eyebrow">ÚLTIMOS RECLUTAMIENTOS</div><h2>Registro de aperturas</h2></div></div><div class="history-list" id="packHistory"><div class="empty-state">Todavía no has abierto ningún sobre.</div></div>
+        </section>
+
+        <section class="view" id="view-gacha">
+          <div class="page-heading"><div><div class="eyebrow">PORTAL DE RECLUTAMIENTO</div><h1>Gachapón</h1><p>Invoca nuevas unidades. Cada tirada consume créditos del juego.</p></div><div class="pity-card"><small>GARANTÍA ÉPICA</small><strong id="pityCounter">0/10</strong><span>tiradas desde la última épica</span></div></div>
+          <div class="gacha-stage"><div class="gacha-orb"><div class="orb-ring"></div><div class="orb-core">✦</div><div class="orb-spark spark-a">✧</div><div class="orb-spark spark-b">✦</div><div class="orb-spark spark-c">·</div></div><div class="gacha-copy"><div class="eyebrow">BANNER PERMANENTE</div><h2>Resonancia<br><em>del Umbral</em></h2><p>Un portal entre mundos. Cada invocación puede revelar un nuevo aliado para tu colección.</p><div class="gacha-rates"><span>Común <b>60%</b></span><span>Raro <b>27%</b></span><span>Épico <b>10%</b></span><span>Legendario <b>3%</b></span></div><div class="gacha-actions"><button class="primary-button" id="pullOneBtn">Invocar ×1 · 100 ◈</button><button class="secondary-button" id="pullTenBtn">Invocar ×10 · 900 ◈</button></div><small class="muted">Garantía: al menos una unidad rara o superior en cada tirada de 10.</small></div></div>
+          <div id="gachaResults" class="gacha-results" hidden></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <dialog id="resultDialog" class="result-dialog"><button class="dialog-close" id="closeResult" aria-label="Cerrar">×</button><div id="resultContent"></div></dialog>
+  <dialog id="settingsDialog" class="settings-dialog"><button class="dialog-close" id="closeSettings" aria-label="Cerrar">×</button><div class="eyebrow">PREFERENCIAS</div><h2>Ajustes</h2><p>Tu progreso se guarda en este dispositivo.</p><label class="setting-row"><span><strong>Animaciones de combate</strong><small>Mostrar mensajes durante la batalla</small></span><input id="animationsToggle" type="checkbox" checked></label><label class="setting-row"><span><strong>Reducir movimiento</strong><small>Desactivar efectos visuales decorativos</small></span><input id="reducedMotionToggle" type="checkbox"></label><button class="secondary-button full-width" id="exportSaveBtn">Exportar partida guardada</button><button class="danger-button full-width" id="resetGameBtn">Reiniciar partida local</button><small class="muted">Reiniciar elimina los datos guardados de este juego en este navegador.</small></dialog>
+  <script src="game.js"></script>
+</body>
+</html>
